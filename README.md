@@ -1,2 +1,2 @@
-# shuframework-springboot-maven
-shuframework 框架 基于springboot_mybatis_mybatisplus_maven
+# springboot-maven
+基于springboot_mybatis_mybatisplus_maven的初始独立实验项目，可能存在多个版本
