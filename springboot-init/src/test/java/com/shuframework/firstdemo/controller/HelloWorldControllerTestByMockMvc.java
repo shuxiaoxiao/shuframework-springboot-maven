@@ -13,6 +13,11 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+/**
+ * 推荐，可以不用启动项目就能执行脚本
+ * @author shu
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class HelloWorldControllerTestByMockMvc {
