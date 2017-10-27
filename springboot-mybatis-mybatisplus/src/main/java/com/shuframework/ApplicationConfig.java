@@ -9,12 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @MapperScan("com.shuframework.*.dao")
 public class ApplicationConfig {
-
-	static Logger log = LoggerFactory.getLogger(ApplicationConfig.class);
-	
+//	static Logger log = LoggerFactory.getLogger(ApplicationConfig.class);
 	public static void main(String[] args) {
 		SpringApplication.run(ApplicationConfig.class, args);
-		log.info("=======启动==========");
 	}
 	
 	//按照之前的操作，应该是需要注入sqlSession, 集成了mybatis-spring-boot-starter可以省略

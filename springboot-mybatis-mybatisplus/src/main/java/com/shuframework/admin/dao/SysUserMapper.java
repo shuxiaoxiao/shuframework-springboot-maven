@@ -1,7 +1,12 @@
 package com.shuframework.admin.dao;
 
 import com.shuframework.admin.model.SysUser;
+
+import java.util.List;
+import java.util.Map;
+
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 
 /**
  * <p>
@@ -13,4 +18,5 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  */
 public interface SysUserMapper extends BaseMapper<SysUser> {
 
+	List<SysUser> selectUserPage(Pagination page, Map<String, Object> params);
 }
