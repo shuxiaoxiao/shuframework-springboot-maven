@@ -92,12 +92,45 @@
 			<resource>
 				<directory>src/main/resources</directory>
 			</resource>
-			<!-- profile配置对应的配置文件路径 
+			<!-- profile配置对应的配置文件路径 -->
 			<resource>
-                <directory>src/environment/${package.environment}</directory>
+                <directory>src/main/environment/${profiles.active}</directory>
             </resource>
-            -->
 		</resources>
 	</build>
+
+	
+	<profiles>
+		<profile>
+			<id>development</id>
+			<properties>
+				<profiles.active>development</profiles.active>
+			</properties>
+			<!-- 默认激活 
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation> -->
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<profiles.active>test</profiles.active>
+			</properties>
+			<!-- 默认激活 
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation> -->
+		</profile>
+		<profile>
+			<id>product</id>
+			<properties>
+				<profiles.active>product</profiles.active>
+			</properties>
+			<!-- 默认激活
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation> -->
+		</profile>
+	</profiles>
 	
 </project>
