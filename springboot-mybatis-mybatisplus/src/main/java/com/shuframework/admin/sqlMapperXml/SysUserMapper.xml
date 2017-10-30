@@ -26,19 +26,27 @@
 	<select id="selectUserPage" resultType="com.shuframework.admin.model.SysUser" >
 	<!-- <select id="selectUserPage" resultMap="BaseResultMap" parameterType="java.util.Map"> -->
 		SELECT
-			id, name, login_name AS loginName, pwd, sex, icon,
-			phone_num AS phoneNum, phone_num2 AS phoneNum2, user_type AS userType,
-			address, `state`, deptid, createtime, leavetime, sortid, updatetime
-		FROM sys_user
+			u.id, u.name, u.login_name AS loginName, u.pwd, u.sex, u.icon,
+			phone_num AS phoneNum, u.phone_num2 AS phoneNum2, u.user_type AS userType,
+			address, u.state, u.deptid, u.createtime, u.leavetime, u.sortid, u.updatetime,
+			d.`name`, d.pid
+		FROM sys_user u
+		LEFT JOIN sys_dept d on d.id = u.deptid
 		<where>
             <if test=" name != null and name != '' ">
-                name = #{name}
+                and u.name = #{name}
+            </if>
+            <if test=" stateList != null ">
+                and u.state in 
+                <foreach item="idItem" index="index" collection="stateList" open="(" separator="," close=")">
+					#{idItem}
+				</foreach>
             </if>
             <if test=" startTime != null ">
-                <![CDATA[ and create_time >= #{startTime} ]]>
+                 and u.createtime <![CDATA[ >= ]]> #{startTime}
             </if>
             <if test=" endTime != null ">
-                <![CDATA[ and create_time <= #{endTime} ]]>
+                and u.createtime <![CDATA[ <= ]]> #{endTime}
             </if>
         </where>
 	</select>

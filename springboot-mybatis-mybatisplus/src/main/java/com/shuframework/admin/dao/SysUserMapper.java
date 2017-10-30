@@ -18,5 +18,6 @@ import com.baomidou.mybatisplus.plugins.pagination.Pagination;
  */
 public interface SysUserMapper extends BaseMapper<SysUser> {
 
+	//Pagination 对象是保证被拦截器进行分页
 	List<SysUser> selectUserPage(Pagination page, Map<String, Object> params);
 }

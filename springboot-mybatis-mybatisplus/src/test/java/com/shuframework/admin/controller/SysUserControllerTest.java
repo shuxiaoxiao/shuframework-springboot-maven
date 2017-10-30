@@ -1,10 +1,11 @@
 package com.shuframework.admin.controller;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import org.apache.http.client.utils.URLEncodedUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,7 +40,7 @@ public class SysUserControllerTest {
     @Autowired
     private SysUserController userController;
     
-    @Autowired  
+    @Autowired
     private WebApplicationContext wac;
 
     //MockMvcBuilders构建MockMvc对象，本测试类是测试单个controller，不用注入所有项目
@@ -146,11 +147,16 @@ public class SysUserControllerTest {
     //@RequestBody String userStr 接收
     @Test
     public void list6_post() throws Exception {
+    	List<String> stateList = new ArrayList<>();
+    	stateList.add("1");
+    	stateList.add("2");
+    	
     	Map<String, Object> map = new HashMap<>();
     	map.put("pageIndex", 1);
     	map.put("pageSize", 10);
     	map.put("name", "aa");
-    	map.put("userType", "1");
+//    	map.put("stateList", stateList);
+    	map.put("startTime", "2017-01-01");
     	
     	MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/sysUser/list6")
     			.contentType(MediaType.APPLICATION_JSON_UTF8)
