@@ -1,12 +1,9 @@
 package com.shuframework;
 
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.shuframework.*.dao")
 public class ApplicationConfig {
 //	static Logger log = LoggerFactory.getLogger(ApplicationConfig.class);
 
@@ -14,7 +11,8 @@ public class ApplicationConfig {
 		SpringApplication.run(ApplicationConfig.class, args);
 	}
 	
-	//按照之前的操作，应该是需要注入sqlSession, 集成了mybatis-spring-boot-starter可以省略
+	//按照之前的操作，应该是需要注入sqlSession, 集成了mybatis-spring-boot-starter可以省略,
+	//现在的项目集成了mybatisplus，其配置已经移到com.shuframework.config.MybatisPlusConfig类
 //    @Bean
 //    @ConfigurationProperties(prefix="spring.datasource")
 //    public DataSource dataSource() {
