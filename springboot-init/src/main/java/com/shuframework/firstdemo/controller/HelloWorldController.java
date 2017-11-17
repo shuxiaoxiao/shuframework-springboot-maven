@@ -3,11 +3,19 @@ package com.shuframework.firstdemo.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
+@Api(description = "示例操作")
+//@Api(value = "示例操作", description = "示例操作") //value没起作用，反而是description 起作用
 public class HelloWorldController {
 	
     @RequestMapping(value = "/hello")
@@ -16,6 +24,7 @@ public class HelloWorldController {
     }
     
     @RequestMapping(value = "/helloGet", method = RequestMethod.GET)
+    @ApiOperation(value = "hello-get", notes = "get示例", httpMethod = "GET")
     public String helloGet() {
     	return "Hello World, @RequestMapping-get请求";
     }
@@ -27,6 +36,11 @@ public class HelloWorldController {
     
     //请求路径http://localhost:8080/helloGetHasParam?name=中国
     @RequestMapping(value = "/helloGetHasParam", method = RequestMethod.GET)
+    @ApiOperation(value = "get含参数请求", notes = "", httpMethod = "GET")
+    //该种方式默认是paramType = "body"，application/json，一般不存在多个，不同paramType可以存在一个
+  	@ApiImplicitParams({
+          @ApiImplicitParam(name = "name", value = "姓名", required = true, paramType = "query", dataType = "string"),
+  	})
     public String helloGetHasParam(String name) {
     	return "Hello World, @RequestMapping-get请求, 参数" + name;
     }
@@ -57,8 +71,23 @@ public class HelloWorldController {
     	return "Hello World, @RequestMapping-post请求, 参数" + name;
     }
     
+    /**
+     * @RequestParam 通过表单的形式提交的，未添加默认是该注解
+     * @param name
+     * @return
+     */
     @PostMapping(value = "/helloPost2HasParam")
     public String helloPost2HasParam(String name) {
+    	return "Hello World, @PostMapping请求, 参数" + name;
+    }
+    
+    /**
+     * @RequestBody 通过json的形式提交的,可以用对象来接收json的值
+     * @param name
+     * @return
+     */
+    @PostMapping(value = "/helloPostHasParam3")
+    public String helloPostHasParam3(@RequestBody String name) {
     	return "Hello World, @PostMapping请求, 参数" + name;
     }
     
