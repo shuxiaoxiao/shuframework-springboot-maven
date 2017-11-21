@@ -20,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.shuframework.admin.model.SysUser;
 import com.shuframework.admin.service.SysUserService;
 
-import ch.qos.logback.core.util.FileUtil;
 
 @Controller
 @RequestMapping("/sysUser")
