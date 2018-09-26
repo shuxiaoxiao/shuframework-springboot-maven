@@ -1,11 +1,15 @@
 package com.shuframework.javaeedemo;
 
+import javax.servlet.Filter;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.DispatcherServlet;
+
+import com.shuframework.javaeedemo.filter.AFilter;
+import com.shuframework.javaeedemo.filter.MyFilter;
 
 /*
  * 相当于@Configuration,@EnableAutoConfiguration和 @ComponentScan的组合，并具有他们的默认属性值
@@ -18,7 +22,7 @@ import org.springframework.web.servlet.DispatcherServlet;
  * Servlet、Filter、Listener可以直接通过@WebServlet、@WebFilter、@WebListener注解自动注册，
  * 无需其他代码。
  */
-@ServletComponentScan
+//@ServletComponentScan
 public class ServletSampleApplication {
 	
 	//内置了Tomcat 默认端口是8080，通过 main 方法启动项目，在浏览器或其他post 测试工具直接web 访问项目，如http://localhost:8080/hello
@@ -45,5 +49,40 @@ public class ServletSampleApplication {
 ////	   registration.addUrlMappings("*.json");
 //	   return registration;
 //	 }
+	
+	@Bean
+	public FilterRegistrationBean authFilterRegistration() {
+		FilterRegistrationBean registration = new FilterRegistrationBean();
+		registration.setFilter(aFilter());
+		registration.addUrlPatterns("/*");
+//		registration.addInitParameter("paramName", "paramValue");
+		registration.setName("aFilter");
+		registration.setOrder(Integer.MAX_VALUE-1);
+
+		return registration;
+	}
+	
+	@Bean
+	public FilterRegistrationBean myFilterRegistration() {
+		FilterRegistrationBean registration = new FilterRegistrationBean();
+		registration.setFilter(myFilter());
+		registration.addUrlPatterns("/*");
+//		registration.addInitParameter("paramName", "paramValue");
+		registration.setName("myFilter");
+		registration.setOrder(Integer.MAX_VALUE-5);
+
+		return registration;
+	}
+
+
+	@Bean(name = "myFilter")
+	public Filter myFilter() {
+		return new MyFilter();
+	}
+
+	@Bean(name = "aFilter")
+	public Filter aFilter() {
+		return new AFilter();
+	}
 
 }
